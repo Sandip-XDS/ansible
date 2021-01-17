@@ -1,0 +1,20 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+          - name: Cache Update :- Running
+            apt:
+                    update_cache: yes
+
+
+          - name: add php support for apache
+            apt:
+                    name: libapache2-mod-php
+                    state: latest
+          
+          - name: Apache 2 Installation Running
+            apt:
+                    name: apache2
+                    state: latest
+

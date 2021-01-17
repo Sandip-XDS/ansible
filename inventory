@@ -4,6 +4,7 @@
 192.168.10.30
 
 
+
 [apps]
 192.168.10.10
 
@@ -13,3 +14,6 @@
 [sshs]
 192.168.10.30
 
+[all:vars]
+ansible_user=vagrant
+#ansible_pass=vagrant
