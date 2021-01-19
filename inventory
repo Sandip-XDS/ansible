@@ -1,8 +1,8 @@
 [vms]
-192.168.10.10
-192.168.10.20
-192.168.10.30
-192.168.10.40
+192.168.10.10 apache_package=apache2 php_package=lib2apache2-mod-php
+192.168.10.20 apache_package=apache2 php_package=lib2apache2-mod-php
+192.168.10.30 apache_package=apache2 php_package=lib2apache2-mod-php
+192.168.10.40 apache_package=httpd php_package=php
 
 
 [apt]

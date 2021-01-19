@@ -7,8 +7,8 @@
   - name: Installing Apache2 & PHP Support along with Cache Update
     apt:
        name:
-          - apache2
-          - libapache2-mod-php
+          - nmap
+            #- libapache2-mod-php
        state: latest
        update_cache: yes
     when: ansible_distribution == "Ubuntu"
@@ -17,8 +17,8 @@
   - name: Installing HTTPD & PHP Support Along with Cache Update
     yum:
        name:
-          - httpd
-          - php
+          - nmap
+            #- php
        state: latest
        update_cache: yes
     when: ansible_distribution == "CentOS"
