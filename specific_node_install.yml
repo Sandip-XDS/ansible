@@ -1,0 +1,80 @@
+---
+
+- hosts: all 
+  become: true
+  pre_tasks:
+
+###################################################################
+ 
+  - name: Installing Updates of ( Ubuntu )
+    tags: always
+    apt:
+       upgrade: dist
+       update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Installing Updates of ( CentOS )
+    dnf:
+       update_only: yes
+       update_cache: yes
+    when: ansible_distribution == "CentOS"
+
+##################################################################
+
+- hosts: web_servers
+  tags: web-server,apache,apache2
+  become: true
+  tasks:
+
+  - name: Installing Apache2 & PHP Support along with Cache Update
+    apt:
+       name:
+          - apache2
+         #- libapache2-mod-php
+       state: latest
+       update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+
+  - name: Installing HTTPD & PHP Support Along with Cache Update
+    tags: centos,httpd,apache2,php
+    dnf:
+       name:
+          - httpd
+          - php
+       state: latest
+       update_cache: yes
+    when: ansible_distribution == "CentOS"
+
+#################################################################
+
+- hosts: db_servers
+  become: true
+  tasks:
+  
+  - name: Installing MariaDB in Database Server ( Ubuntu )
+    tags: mariadb,db,database,ubuntu-db
+    apt:
+      name: mariadb-server
+      state: latest
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Installing MariaDB in Database Server ( CentOS )
+    tags: mariadb,cent-db,databse
+    dnf:
+      name: mariadb
+      state: latest
+    when: ansible_distribution == "CentOS"
+
+
+##############################################################
+
+- hosts: file_servers
+  tags: files,samba
+  become: true
+  tasks:
+  
+  - name: Installing Samba File Servers
+    yum:
+      name: samba
+      state: latest
